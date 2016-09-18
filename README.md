@@ -29,7 +29,7 @@ Direct Use:
 
 	func main() {
 		u := User{"man", 40}
-		valid := validation.Validation{}
+		valid := validation.New()
 		valid.Required(u.Name, "name")
 		valid.MaxSize(u.Name, 15, "nameMax")
 		valid.Range(u.Age, 0, 140, "age")

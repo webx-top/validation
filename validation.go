@@ -9,6 +9,16 @@ import (
 	"github.com/webx-top/tagfast"
 )
 
+func New(args ...func(*Validation)) *Validation {
+	valid := &Validation{}
+	if len(args) > 0 {
+		for _, fn := range args {
+			fn(valid)
+		}
+	}
+	return valid
+}
+
 type ValidFormer interface {
 	Valid(*Validation)
 }
