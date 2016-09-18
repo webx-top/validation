@@ -41,6 +41,10 @@ func (e *ValidationError) String() string {
 	return e.Message
 }
 
+func (e *ValidationError) Error() string {
+	return e.String()
+}
+
 // A ValidationResult is returned from every validation method.
 // It provides an indication of success, and a pointer to the Error (if any).
 type ValidationResult struct {
