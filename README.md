@@ -7,18 +7,18 @@ validation is a form validation for a data validation and error collecting using
 
 Install:
 
-	go get github.com/coscms/webx/validation
+	go get github.com/webx-top/validation
 
 Test:
 
-	go test github.com/coscms/webx/validation
+	go test github.com/webx-top/validation
 
 ## Example
 
 Direct Use:
 
 	import (
-		"github.com/coscms/webx/validation"
+		"github.com/webx-top/validation"
 		"log"
 	)
 
@@ -49,7 +49,7 @@ Direct Use:
 Struct Tag Use:
 
 	import (
-		"github.com/coscms/webx/validation"
+		"github.com/webx-top/validation"
 	)
 
 	// validation function follow with "valid" tag
