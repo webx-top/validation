@@ -31,6 +31,7 @@ type ValidationError struct {
 	Tmpl       string      //错误信息所使用的文本模板
 	Value      interface{} //要验证的值
 	LimitValue interface{}
+	withField  bool
 }
 
 // Returns the Message.
@@ -38,7 +39,18 @@ func (e *ValidationError) String() string {
 	if e == nil {
 		return ""
 	}
+	if e.withField {
+		return e.Field + `: ` + e.Message
+	}
 	return e.Message
+}
+
+func (e *ValidationError) WithField(args ...bool) *ValidationError {
+	e.withField = true
+	if len(args) > 0 {
+		e.withField = args[0]
+	}
+	return e
 }
 
 func (e *ValidationError) Error() string {
