@@ -425,7 +425,25 @@ func (n NoMatch) GetLimitValue() interface{} {
 	return n.Regexp.String()
 }
 
-var alphaDashPattern = regexp.MustCompile(DefaultRule.AlphaDash)
+var (
+	alphaDashPattern *regexp.Regexp
+	emailPattern     *regexp.Regexp
+	zipCodePattern   *regexp.Regexp
+	telPattern       *regexp.Regexp
+	mobilePattern    *regexp.Regexp
+	ipPattern        *regexp.Regexp
+	base64Pattern    *regexp.Regexp
+)
+
+func init() {
+	alphaDashPattern = regexp.MustCompile(DefaultRule.AlphaDash)
+	emailPattern = regexp.MustCompile(DefaultRule.Email)
+	zipCodePattern = regexp.MustCompile(DefaultRule.ZipCode)
+	telPattern = regexp.MustCompile(DefaultRule.Telephone)
+	mobilePattern = regexp.MustCompile(DefaultRule.Mobile)
+	ipPattern = regexp.MustCompile(DefaultRule.IPv4)
+	base64Pattern = regexp.MustCompile(DefaultRule.Base64)
+}
 
 type AlphaDash struct {
 	NoMatch
@@ -444,8 +462,6 @@ func (a AlphaDash) GetLimitValue() interface{} {
 	return nil
 }
 
-var emailPattern = regexp.MustCompile(DefaultRule.Email)
-
 type Email struct {
 	Match
 	Key string
@@ -463,8 +479,6 @@ func (e Email) GetLimitValue() interface{} {
 	return nil
 }
 
-var ipPattern = regexp.MustCompile(DefaultRule.IPv4)
-
 type Ip struct {
 	Match
 	Key string
@@ -481,8 +495,6 @@ func (i Ip) GetKey() string {
 func (i Ip) GetLimitValue() interface{} {
 	return nil
 }
-
-var base64Pattern = regexp.MustCompile(DefaultRule.Base64)
 
 type Base64 struct {
 	Match
@@ -502,7 +514,6 @@ func (b Base64) GetLimitValue() interface{} {
 }
 
 // just for chinese mobile phone number
-var mobilePattern = regexp.MustCompile(DefaultRule.Mobile)
 
 type Mobile struct {
 	Match
@@ -522,7 +533,6 @@ func (m Mobile) GetLimitValue() interface{} {
 }
 
 // just for chinese telephone number
-var telPattern = regexp.MustCompile(DefaultRule.Telephone)
 
 type Tel struct {
 	Match
@@ -565,7 +575,6 @@ func (p Phone) GetLimitValue() interface{} {
 }
 
 // just for chinese zipcode
-var zipCodePattern = regexp.MustCompile(DefaultRule.ZipCode)
 
 type ZipCode struct {
 	Match
