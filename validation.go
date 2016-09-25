@@ -315,8 +315,8 @@ func (v *Validation) validExec(obj interface{}, baseName string, args ...string)
 		err = fmt.Errorf("%v must be a struct or a struct pointer", obj)
 		return
 	}
-	var chkFields map[string][]string = make(map[string][]string)
-	var pNum int = len(args)
+	chkFields := make(map[string][]string)
+	pNum := len(args)
 	//fmt.Println(objT.Name(), ":[Struct NumIn]", pNum)
 	if pNum > 0 {
 		//aa.b.c,ab.b.c
