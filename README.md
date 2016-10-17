@@ -76,7 +76,7 @@ type Group struct {
 	NotValid `valid:"-"` //valid标签设为“-”，意味着跳过此项不查询其成员
 }
 func main() {
-	valid := validation.New{}
+	valid := validation.New()
 	u := User{Name: "test", Age: 40}
 	b, err := valid.Valid(u) //检查所有字段
 	//b, err := valid.Valid(u, "Name", "Age") //检查指定字段：Name和Age
