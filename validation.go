@@ -23,6 +23,8 @@ type ValidFormer interface {
 	Valid(*Validation)
 }
 
+var NoError = &ValidationError{}
+
 type ValidationError struct {
 	Message    string      //错误信息
 	Key        string      //验证键(比如：Title|Required)
@@ -114,7 +116,7 @@ func (v *Validation) Error() *ValidationError {
 	if v.HasError() {
 		return v.Errors[0]
 	}
-	return nil
+	return NoError
 }
 
 // Test that the argument is non-nil and non-empty (if string or list)
