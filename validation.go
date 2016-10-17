@@ -87,6 +87,7 @@ func (r *ValidationResult) Message(message string, args ...interface{}) *Validat
 type Validation struct {
 	Errors    []*ValidationError
 	ErrorsMap map[string]*ValidationError
+	SendError func(*ValidationError)
 }
 
 func (v *Validation) Clear() {
@@ -109,15 +110,11 @@ func (v *Validation) ErrorMap() map[string]*ValidationError {
 	return v.ErrorsMap
 }
 
-// Add an error to the validation context.
-func (v *Validation) Error(message string, args ...interface{}) *ValidationResult {
-	result := (&ValidationResult{
-		Ok:    false,
-		Error: &ValidationError{},
-		Valid: v,
-	}).Message(message, args...)
-	v.Errors = append(v.Errors, result.Error)
-	return result
+func (v *Validation) Error() *ValidationError {
+	if v.HasError() {
+		return v.Errors[0]
+	}
+	return nil
 }
 
 // Test that the argument is non-nil and non-empty (if string or list)
@@ -247,6 +244,9 @@ func (v *Validation) setError(err *ValidationError) {
 	}
 	if _, ok := v.ErrorsMap[err.Field]; !ok {
 		v.ErrorsMap[err.Field] = err
+	}
+	if v.SendError != nil {
+		v.SendError(err)
 	}
 }
 
