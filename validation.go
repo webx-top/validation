@@ -414,12 +414,12 @@ func (v *Validation) ValidSimple(name string, val string, rule string) (b bool, 
 	return
 }
 
-func (v *Validation) OkBy(name string, val string, rule string) (b bool) {
+func (v *Validation) ValidField(name string, val string, rule string) (b bool) {
 	b, _ = v.ValidSimple(name, val, rule)
 	return
 }
 
-func (v *Validation) Ok(obj interface{}, args ...string) (b bool) {
+func (v *Validation) ValidOk(obj interface{}, args ...string) (b bool) {
 	b, _ = v.Valid(obj, args...)
 	return
 }
